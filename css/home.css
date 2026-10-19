@@ -1,0 +1,47 @@
+.home {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 0;
+    background-image: url("../assets/homepage-background-batman.png");
+    backgroud-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.home-menu {
+    width: 40vw;
+    max-width: 610px;
+    margin-left: 12vw;
+    transform: translateY(-10px);
+}
+
+.home h1 {
+    margin: 0;
+    color: #d4d0ba;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(30px, 3.3vw, 68px);
+    font-weight: 800;
+    line-height: 1.08;
+    text-shadow: 1px 1px 0 #101719;
+}
+
+.home h1  span {
+    display: block;
+    width: max-content;
+    white-space: nowrap;
+}
+
+
+.home h1 span:first-child {
+    letter-spacing: -0.035em;
+    transform: rotate(-0.6deg);
+}
+
+.home h1 span:last-child {
+    margin-top: 3px;
+    margin-left: 2px;
+    letter-spacing: -0.045em;
+    transform: rotate(0.25deg);
+}
+
