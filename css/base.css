@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    color-scheme: dark;
+    background: #182024;
+}
+
+body {
+    margin: 0;
+    color: #d5d1bc;
+    font-family: "courier New", Courier, monospace;
+}
+
+button {
+    font: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible {
+    outline: 2px dashed #d8cfab;
+    outline-offset: 6px;
+}
+
+::selection {
+    color: #e3decb;
+    background: #535645;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+[hidden] {
+    display: none !important;
+}
