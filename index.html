@@ -8,6 +8,8 @@
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/intro.css">
 
 
 </head>
@@ -27,6 +29,16 @@
             </nav>
         </div>
     </main>
+
+    <main class="game-scene" id="game-screen" hidden>
+        <div class="game-hud">
+            <button class="board" id="home-button" type="button"></button>HOME</button>
+        </div>
+    </main>
+
+    <section class="intro-screen" id="intro-screen" hidden>
+        <p class="intro-text" id="intro-text" tabindex="-1"></p>
+    </section>
 
     <dialog class="overlay" id="info-overlay">
         <section class="notice">
