@@ -32,8 +32,30 @@
 
     <main class="game-scene" id="game-screen" hidden>
         <div class="game-hud">
-            <button class="board" id="home-button" type="button"></button>HOME</button>
+            <div class="light-hud">
+                <img src="assets/light-icon.png" alt"" width="20" height="30">
+                <span>LIGHT:</span>
+                <span>100%</span>
+            </div>
+
+            <button class="game-home" id="home-button" type="button">HOME</button>
         </div>
+
+        <div class="game-world" id="game-world">
+            <div class="platforms" id="starting-platforms">
+                      <img class="stone-platform platform-one" src="assets/stone-platform.png" alt="" draggable="false">
+      <img class="stone-platform platform-two" src="assets/stone-platform.png" alt="" draggable="false">
+      <img class="stone-platform platform-three" src="assets/stone-platform.png" alt="" draggable="false">
+      <img class="stone-platform platform-four" src="assets/stone-platform.png" alt="" draggable="false">
+      <img class="stone-platform platform-five" src="assets/stone-platform.png" alt="" draggable="false">
+      </div>
+
+      <div class="player-start">
+        <img class="batman" src="assets/batman.png" alt="Batman standing with a candle" draggable="false">
+        <img class="player-candle" src="assets/light-icon.png" alt"" draggable="false">
+      </div>
+      <div class="ground"></div>
+      </div>
     </main>
 
     <section class="intro-screen" id="intro-screen" hidden>
