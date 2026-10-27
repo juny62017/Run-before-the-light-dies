@@ -9,6 +9,7 @@ let playerX = 0;
 let playerY = 0;
 let verticalVelocity = 0;
 let grounded = true;
+let jumpCount = 0;
 let spriteWidth = 0;
 let hitboxWidth = 0;
 let hitboxHeight = 0;
@@ -85,6 +86,7 @@ function checkPlatforms(seconds) {
                 playerY = platform.top - hitboxHeight;
                 verticalVelocity = 0;
                 grounded = true;
+                jumpCount = 0;
             } else if (
                 verticalVelocity < 0 && 
                 oldY >= platform.bottom - 0.5 &&
@@ -109,7 +111,12 @@ function handleKeyDown(event) {
         "ArrowRight"
     ].includes(event.code);
 
-    const jumpKey = ["Space"].includes(event.code);
+    const jumpKey = [
+        "KeyW",
+        "ArrowUp",
+        "Space"
+    ].includes(event.code);
+
 
     if (!moveKey && !jumpKey) {
         return;
@@ -118,12 +125,19 @@ function handleKeyDown(event) {
     event.preventDefault();
     heldKeys[event.code] = true;
 
-    if (jumpKey && !event.repeat && grounded) {
-        verticalVelocity = -jumpStrength * sceneScale;
-        grounded = false;
-    }
-}
+    if (
+        jumpKey &&
+        newPress &&
+        !event.repeat &&
+        (grounded || jumpCount < 2)
+    ) {
+        verticalVelocity =
+        -jumpStrength * sceneScale * (grounded ? 1 : 0.75);
 
+        jumpCount = grounded ? 1 : 2;
+        grounded = false;
+
+    }
 
 
 event,preventDefault();
@@ -131,6 +145,9 @@ heldKeys[event.code] = true;
 }
 
 function handleKeyUp(event) {
+    if (gameActive && heldKeys[event.code]) {
+        event.preventDefault();
+    }
     delete heldKeys[event.code];
 }
     

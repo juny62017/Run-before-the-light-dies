@@ -4,6 +4,8 @@ const homeScreen = document.querySelector("#home-screen");
 const gameScreen = document.querySelector("#game-screen");
 
 const world = document.querySelector(#game-world);
+const startingPlatforms =
+document.querySelector("#starting-platforms");
 
 
 let gameActive = false;
@@ -55,6 +57,18 @@ function resetPlayer() {
     sceneBounds.top +
     groundBounds.height * 0.2;
 
+    startingPlatforms.style.width = sceneWIDTH + "px";
+    world.querySelector(".ground").style.width = sceneWidth + "px";
+
+   const backgroundWidth = 
+   Math.max(sceneWidth, 1280 * sceneScale);
+
+   world.style.backgroundSize = 
+   backgroundWidth + "px auto";
+
+   world.style.backgroundPosition = 
+   (sceneWidth - backgroundWidth) / 2 + "px center"
+
     platforms = Array.from(
        world.querySelectorAll(".stone-platform, .ground"),
        function (image) {
@@ -90,6 +104,7 @@ function resetPlayer() {
 
   verticalVelocity = 0;
   grounded = true;
+  jumpCount = 0;
 
   previousTime = 0;
 
@@ -126,3 +141,19 @@ homeButton.addEventListener("click", goHome);
 
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
+
+window.addEventListener("blur", clearInput);
+
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden) {
+    clearInput();
+    previousTime = 0;
+  }
+});
+
+window.addEventListener("resize", function () {
+  if (!gameScreen.hidden) {
+    respawnAtCheckpoint();
+  });
+
+  
