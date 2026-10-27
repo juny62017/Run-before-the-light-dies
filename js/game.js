@@ -112,6 +112,12 @@ function updateGame(time) {
   movePlayer(seconds);
   drawPlayer();
 
+  if (playerY > sceneHeight +  hitboxHeight) {
+    respawnAtCheckpoint();
+  }
+
+  drawPlayer();
+
   animationFrame = requestAnimationFrame(updateGame);
 }
 
