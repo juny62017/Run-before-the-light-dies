@@ -1,8 +1,3 @@
-const playButton =  document.querySelector('#play-button');
-const homeButton = document.querySelector("#home-button");
-const homescreen = document.querySelector("#home-screen");
-const gameScreen = document.querySelector("game-screen");
-
 
 const introScreen = document.querySelector("#intro-screen");
 const introText = document.querySelector("#intro-text");
@@ -33,6 +28,8 @@ async function startNewRun() {
 
 
     introRunning = true;
+    gameActive = false;
+    cancelAnimationFrame(animationFrame);
     gameScreen.hidden = true;
     playButton.disabled = true;
     homeScreen.inert = true;
@@ -53,6 +50,7 @@ async function startNewRun() {
 
   gameScreen.hidden = false;
   gameScreen.inert = true;
+  resetPlayer();
   await pause(550);
   introScreen.classList.add("is-revealing");
   introScreen.classList.remove("is-visible");
@@ -65,14 +63,11 @@ async function startNewRun() {
   homeScreen.inert = false;
   playButton.disabled = false;
   introRunning = false;
+
+  gameActive = true;
+  previousTime = 0;
+  animationFrame = requestAnimationFrame(updateGame);
+
   homeButton.focus({ preventScroll: true });
 }
 
-function goHome() {
-    gameScreen.hidden = true;
-    homeScreen.hidden = false;
-    playButton.focus({ preventScroll: true});
-}
-
-playButton.addEventListener("click", startNewRun);
-homeButton.addEventListener("click, goHome);
