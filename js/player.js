@@ -1,10 +1,14 @@
 const player = document.querySelector(".player-start");
 
 const movementSpeed = 300;
+const jumpStrength = 780;
+const gravity = 1500;
 const heldKeys = {};
 
 let playerX = 0;
 let playerY = 0;
+let verticalVelocity = 0;
+let grounded = true;
 let spriteWidth = 0;
 let hitboxWidth = 0;
 let hitboxHeight = 0;
@@ -38,20 +42,89 @@ function movePlayer(seconds) {
     const oldX = playerX;
     playerX += direction * movementSpeed * sceneScale * seconds;
 
+    for (const platform of platforms) {
+        if (playerY < platform.bottom && playerY + hitboxHeight > platform.top) {
+            if (
+                direction > 0 &&
+                oldX + hitboxWidth <= platform.left &&
+                PlayerX + hitboxWidth > platform.left 
+            ) {
+                playerX = platform.left - hitboxWidth;
+            }
+
+            if (
+                direction < 0 &&
+                oldX >= platform.right &&
+                playerX < platform.right
+            ) {
+                playerX = platform.right;
+            }
+        }
+    }
+
     playerX = Math.max(
       hitboxOffsetX,
       Math.min(playerX, sceneWidth - spriteWidth + hitboxOffsetX)  
     );
 }
 
+function checkPlatforms(seconds) {
+    const oldY = playerY;
+
+    verticalVelocity += gravity * sceneScale * seconds;
+    playerY += verticalVelocity * seconds;
+    grounded = false;
+
+    for (const platform of platforms) [
+        if (playerX < platform.right && playerX + hitboxWidth > platform.left) {
+            if (
+                verticalVelocity >= 0 && 
+                oldY + hitboxHeight <= platform.top + 0.5 &&
+                PlayerY + hitboxHeight >= platform.top 
+            ) {
+                playerY = platform.top - hitboxHeight;
+                verticalVelocity = 0;
+                grounded = true;
+            } else if (
+                verticalVelocity < 0 && 
+                oldY >= platform.bottom - 0.5 &&
+                playerY < platform.bottom
+            ) {
+                playerY = platform.bottom;
+                verticalVelocity = 0;
+            }
+        }
+    }
+}
 
 function handleKeyDown(event) {
-    if (
-        !gameActive ||
-        !["KeyA", "KeyD", "ArrowLeft", "ArrowRight"].includes(event.code)
-    ) {
+    if (!gameActive) {
         return;
     }
+
+    const monkey = [
+        "KeyA",
+        "KeyD",
+        "ArrowLeft",
+        "ArrowRight"
+    ].includes(event.code);
+
+    const jumpKey = ["Space"].includes(event.code);
+
+    if (!moveKey && !jumpKey) {
+        return;
+    }
+
+    event.preventDefault();
+    heldKeys[event.code] = true;
+
+    if (jumpKey && !event.repeat && grounded) {
+        verticalVelocity = -jumpStrength * sceneScale;
+        grounded = false;
+    }
+}
+
+
 
 event,preventDefault();
 heldKeys[event.code] = true;

@@ -14,6 +14,7 @@ let sceneWidth = 0;
 let sceneHeight = 0;
 let sceneScale = 1;
 let groundY = 0;
+let platforms = [];
 let worldWidth = 0;
 
 
@@ -40,10 +41,10 @@ function resetPlayer() {
     worldWidth = sceneWidth;
 
      spriteWidth = playerBounds.width;
-  hitboxWidth = playerBounds.width;
-  hitboxHeight = playerBounds.height;
-  hitboxOffsetX = 0;
-  hitboxOffsetY = 0;
+  hitboxWidth = playerBounds.width * 0.4;
+  hitboxHeight = playerBounds.height * 0.95;
+  hitboxOffsetX = playerBounds.width * 0.38;
+  hitboxOffsetY = playerBounds.height * 0.03;
 
   world.style.width = worldWidth + "px";
 
@@ -54,10 +55,41 @@ function resetPlayer() {
     sceneBounds.top +
     groundBounds.height * 0.2;
 
+    platforms = Array.from(
+       world.querySelectorAll(".stone-platform, .ground"),
+       function (image) {
+        const bounds = image.getBoundingClientRect();
+
+        if ( image.classList.contains("ground")) {
+          return {
+            left: bounds.left - sceneBounds.left,
+            right: bounds.right - sceneBounds.left,
+            top: groundY,
+            bottom: sceneHeight + hitboxHeight * 2,
+            ground: true
+          }
+        }
+       }
+    )
+
+    return {
+      left: bounds.left - sceneBounds.left + bounds.width * 0.07,
+      right: bounds.right - sceneBounds.left - bounds.width * 0.07,
+      top: bounds.top - sceneBounds.top + bounds.height * 0.15,
+      bottom: bounds.top - sceneBounds.top + bounds.height * 0.8,
+    };
+  }
+};
+
+
+
   const startPosition = sceneWidth <= 700 ? 0.03 : 0.11;
 
   playerX = sceneWidth * startPosition + hitboxOffsetX;
   playerY = groundY - hitboxHeight;
+
+  verticalVelocity = 0;
+  grounded = true;
 
   previousTime = 0;
 
