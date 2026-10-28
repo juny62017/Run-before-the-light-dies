@@ -146,3 +146,11 @@
     right: auto;
 }
 
+.level-scenary {
+    position: absolute;
+    bottom: calc(var(--ground-height) * 0.8 + 8vh);
+    height: auto;
+    pointer-events: none;
+}
+
+

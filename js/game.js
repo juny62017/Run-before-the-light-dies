@@ -31,6 +31,24 @@ function goHome() {
     playButton.focus({ preventScroll: true});
 }
 
+function addScenery(positions, source) {
+  for (const decoration of positions) {
+    const image = document.createElement('img');
+
+    image.src = "assets/" + source;
+    image.className = "level-sceneary";
+    image.alt = "";
+    image.draggable = false;
+
+    image.style.left = decoration.x * sceneScale + "px";
+    image.style.width = decoration.width * sceneScale + "px";
+
+    addScenery.append(image);
+  }
+}
+
+
+
 function resetPlayer() {
     clearInput();
 
