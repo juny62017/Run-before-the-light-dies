@@ -48,11 +48,11 @@
 .ground {
     position: absolute;
     z-index: 2;
-    right: 0;9
+    right: 0;
     bottom: 0;
     left: 0;
     height: var(--ground-height);
-    background-image: url ("../assets/ground-strip.png");
+    background-image: url("../assets/ground-strip.png");
     background-repeat: repeat-x;
     background-size: auto 100%;
 }
