@@ -154,3 +154,12 @@
 }
 
 
+.level-scenary[src$="crypt-wall.png"] {
+    z-index: 0;
+    bottom: calc(var(--ground-height) * 0.8);
+}
+
+.level-scenary[src$="cemetary-gate.png"] {
+    z-index: 1;
+    bottom: calc(var(--ground-height) * 0.8 - 3px);
+}

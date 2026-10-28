@@ -126,6 +126,9 @@ function buildLevel() {
   addScenery(levelTrees, "dead-tree.png");
   addScenery(levelSmallGraves, "grave-small.png");
   addScenery(levelTallGraves, "grave-tall.png");
+  addScenary(levelCryptWalls, "crypt-wall.png");
+  addScenery(levelGate, "cementary-gate.png" );
+  
 
   platforms = Array.from(
     world.querySelectorAll(".stone-platform, .ground"),
