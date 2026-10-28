@@ -7,6 +7,9 @@ const startingPlatforms = document.querySelector("#starting-platforms");
 const extraPlatforms = document.querySelector("#level-platforms");
 const groundSections = document.querySelector("#ground-sections");
 const scenery = document.querySelector("#level-scenery");
+const cryptWalls = document.querySelector('#crypt-walls');
+const gate = document.querySelector("#cementery-gate");
+
 
 let gameActive = false;
 let animationFrame;
@@ -53,6 +56,7 @@ function buildLevel() {
   groundSections.replaceChildren();
   extraPlatforms.replaceChildren();
   scenery.replaceChildren();
+  cryptWalls.replaceChildren();
 
   startingPlatforms.style.width = sceneWidth + "px";
   world.style.width = worldWidth + "px";
@@ -123,12 +127,40 @@ function buildLevel() {
     extraPlatforms.append(image);
   }
 
+  for (const wall of levelCryptWalls) {
+    const section = document.createElement("div");
+    const top = Math.max(0, groundY - wall.height * sceneScale);
+     
+    section.className = "crypt-wall";
+    section.style.left = wall.x * sceneScale + "px";
+    section.style.top = top + "px";
+    section.style.width = wall.width * sceneScale + "px";
+    section.style.height = groundY - top + "px";
+    section.style.backgroundSize = 
+    320 * sceneScale + "px " +
+    240 * sceneScale + "px";
+
+    cryptWalls.append(section);
+  }
+
+
+
   addScenery(levelTrees, "dead-tree.png");
   addScenery(levelSmallGraves, "grave-small.png");
   addScenery(levelTallGraves, "grave-tall.png");
-  addScenary(levelCryptWalls, "crypt-wall.png");
-  addScenery(levelGate, "cementary-gate.png" );
-  
+
+  gate.style.left =
+  levelGate.x * sceneScale + "px"
+
+  gate.style.top =
+  groundY - 
+  (levelGate.height - 20) * sceneScale +
+  "px";
+
+  gate.style.width = 
+  levelGate.width * sceneScale + "px";
+
+
 
   platforms = Array.from(
     world.querySelectorAll(".stone-platform, .ground"),

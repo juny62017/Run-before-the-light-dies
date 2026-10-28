@@ -163,3 +163,42 @@
     z-index: 1;
     bottom: calc(var(--ground-height) * 0.8 - 3px);
 }
+
+.crypt-wall {
+    position: absolute;
+    background-image: url("../assets/crypt-wall.png");
+    background-repeat: repeat;
+}
+
+.cemetery-gate {
+  position: absolute;
+  aspect-ratio: 3 / 2;
+  pointer-events: none;
+}
+
+.cemetery-gate img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gate-post-left {
+    clip-path: insert(0 80% 0 0);
+}
+
+.gate-post-right {
+    clip-path: insect(0 0 0 80%);
+}
+
+
+.gate-leaf-left,
+.gate-leaf-right {
+  transform: scaleX(0.18);
+  transition: transform 650ms ease-in-out;
+}
+
+.gate-closed .gate-leaf-left,
+.gate-closed .gate-leaf-right {
+  transform: scaleX(1);
+}
